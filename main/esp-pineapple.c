@@ -17,6 +17,7 @@ void blink_number(uint16_t num);
 
 void app_main(void) {
     esp_log_level_set("TAG", ESP_LOG_INFO);
+    
     /* init flash storage */
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND) {
@@ -24,27 +25,16 @@ void app_main(void) {
         ret = nvs_flash_init();
     }
 
-    ESP_LOGI(TAG, "Starting WiFi Initialization");
     /* Init Wifi */
+    ESP_LOGI(TAG, "Starting WiFi Initialization");
     wifi_init_config_t wifi_config = WIFI_INIT_CONFIG_DEFAULT();
-    esp_err_t init_error = esp_wifi_init(&wifi_config);
-    if (init_error != ESP_OK) {
-        blink_error();
-    }
-
-    esp_err_t mode_error = esp_wifi_set_mode(WIFI_MODE_STA);
-    if (mode_error != ESP_OK) {
-        blink_error();
-    }
-
+    esp_wifi_init(&wifi_config);
+    esp_wifi_set_mode(WIFI_MODE_STA);
+    
     /* Scan for Piersen's Wifi: SpectrumSetup-47 */
     ESP_LOGI(TAG, "Starting WiFi Scan");
-    esp_err_t scan_error = esp_wifi_scan_start(NULL, 1); // params: default settings, block caller (finish scan and find all APs?)
+    esp_wifi_scan_start(NULL, 1); // params: default settings, block caller (finish scan and find all APs?)
     
-    if (scan_error != ESP_OK) {
-        blink_error();
-    }
-
     ESP_LOGI(TAG, "Getting number of APs found");
     uint16_t num_ap_found;
     esp_wifi_scan_get_ap_num(&num_ap_found);
