@@ -1,0 +1,2 @@
+source /home/piersen/programming/esp/esp-pineapple/build/bootloader/gdbinit/symbols
+source /home/piersen/programming/esp/esp-pineapple/build/bootloader/gdbinit/connect
