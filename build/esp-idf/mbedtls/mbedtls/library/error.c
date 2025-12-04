@@ -1,1 +1,0 @@
-/home/piersen/programming/esp/lib/esp-idf/components/mbedtls/mbedtls/library/error.c
