@@ -1,2 +1,13 @@
-idf_component_register(SRCS "esp-pineapple.c"
-                    INCLUDE_DIRS ".")
+idf_component_register(
+    SRCS 
+        "esp-pineapple.c"
+        "utils/led/led_utils.c" 
+        "utils/nvs/nvs_utils.c" 
+        "utils/wifi/wifi_utils.c"
+    INCLUDE_DIRS 
+        "."
+        "utils" 
+        "utils/led"
+        "utils/nvs"
+        "utils/wifi"
+)
